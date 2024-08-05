@@ -13,6 +13,7 @@ import com.wikosac.currentactivefragment.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var currentActiveFragment: CurrentActiveFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +34,17 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        CurrentActiveFragment.get(this, R.id.nav_host_fragment_activity_main) {
-            val fragmentName = it.javaClass.simpleName
-            Log.d("CurrentActiveFragment", "Current active fragment name: $fragmentName")
+        currentActiveFragment = CurrentActiveFragment(this)
+        currentActiveFragment.get(R.id.nav_host_fragment_activity_main) { activeFragment ->
+            val fragmentName = activeFragment.javaClass.simpleName
+            Log.d("CurrentActiveFragment", "Current active fragment: $fragmentName")
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::currentActiveFragment.isInitialized) {
+            currentActiveFragment.unregister()
         }
     }
 }

@@ -1,18 +1,19 @@
 package com.wikosac.currentactivefragment
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment
 
-object CurrentActiveFragment {
+class CurrentActiveFragment(private val fragmentActivity: FragmentActivity) : AppCompatActivity() {
+
+    private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
     fun get(
-        fragmentActivity: FragmentActivity,
         navHostFragmentId: Int,
         currentActiveFragment: (Fragment) -> Unit
     ) {
         val sfm = fragmentActivity.supportFragmentManager
-        val fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
         val navHostFragment = sfm.findFragmentById(navHostFragmentId) as NavHostFragment
         fragmentLifecycleCallbacks = FragmentLifecycleCallbacks(navHostFragment) { activeFragment ->
             activeFragment?.let {
@@ -20,6 +21,12 @@ object CurrentActiveFragment {
             }
         }
         sfm.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true)
+    }
+
+    fun unregister() {
+        fragmentActivity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(
+            fragmentLifecycleCallbacks
+        )
     }
 
 }
