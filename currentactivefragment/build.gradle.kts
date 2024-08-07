@@ -9,7 +9,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -53,7 +53,7 @@ publishing {
             }
 
             pom {
-                name.set("CurrentActiveFragment")
+                name.set("currentactivefragment")
                 description.set("Library for getting current active fragment")
 
                 developers {

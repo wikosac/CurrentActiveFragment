@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.NavHostFragment
 
-class CurrentActiveFragment(private val fragmentActivity: FragmentActivity) : AppCompatActivity() {
+class CurrentActiveFragment(
+    private val fragmentActivity: FragmentActivity
+) : AppCompatActivity() {
 
     private lateinit var fragmentLifecycleCallbacks: FragmentLifecycleCallbacks
 
@@ -23,7 +25,7 @@ class CurrentActiveFragment(private val fragmentActivity: FragmentActivity) : Ap
         sfm.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, true)
     }
 
-    fun unregister() {
+    fun remove() {
         fragmentActivity.supportFragmentManager.unregisterFragmentLifecycleCallbacks(
             fragmentLifecycleCallbacks
         )

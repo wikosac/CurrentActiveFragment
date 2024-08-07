@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.NavHostFragment
 
-class FragmentLifecycleCallbacks(
+internal class FragmentLifecycleCallbacks(
     private val navHostFragment: NavHostFragment,
     private val onFragmentChanged: (Fragment?) -> Unit
 ) : FragmentManager.FragmentLifecycleCallbacks() {
