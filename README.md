@@ -6,7 +6,7 @@ Library to get current active fragment easily
 # Gradle
 build.gradle.kts
 ```kotlin
-implementation("com.github.wikosac:CurrentActiveFragment:1.0.2")
+implementation("com.github.wikosac:CurrentActiveFragment:1.0.3")
 ```
 settings.gradle.kts
 ```kotlin
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         if (::currentActiveFragment.isInitialized) {
-            currentActiveFragment.unregister()
+            currentActiveFragment.remove()
         }
     }
 }
